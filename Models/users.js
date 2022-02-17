@@ -24,7 +24,8 @@ const userSchema = new mongoose.Schema({
   },
   inventory: [
     {}
-    // not sure if listing out all objects and properties is necessary
+  ],
+    // defining all inventory items' properties is necessary, but in testing we can accept any object
     /*
     {
       name: {
@@ -78,6 +79,5 @@ const userSchema = new mongoose.Schema({
       //isPotion ?
     } 
     */
-  ],
 });
 module.exports = mongoose.model("User", userSchema);
