@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  leftValue: {
+    type: Number,
+    required: true,
+  },
   lifeCount: {
     type: Number,
     required: true,
