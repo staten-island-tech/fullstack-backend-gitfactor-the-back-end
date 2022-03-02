@@ -4,7 +4,7 @@ const userController = require("../Controllers/userController")
 
 router.get("/", userController.getUserData); //on login
 router.post("/add", userController.createUserData); //on register
-router.patch("/user/:id", userController.updateUserData); //on logout
-router.delete("/user/:id", userController.deleteUserData); //on delete account/restart 
+router.patch("/logout", userController.updateUserData); //on logout
+router.delete("/delete", userController.deleteUserData); //on delete account/restart 
 
 module.exports = router;
