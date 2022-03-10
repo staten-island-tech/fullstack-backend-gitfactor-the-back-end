@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema({
         required: true,
       },
       img: {
-        type: Buffer, //in the form of require("img")
+        type: String,
         required: true,
       },
       isInteractable: {
