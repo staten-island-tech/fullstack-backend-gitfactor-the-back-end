@@ -27,16 +27,16 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   inventory: [
-    {}
-  ],
-    // defining all inventory items' properties is necessary, but in testing we can accept any object
-    /*
     {
       name: {
         type: String,
         required: true,
       },
       id: {
+        type: Number,
+        required: true,
+      },
+      section: {
         type: Number,
         required: true,
       },
@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema({
         required: true,
       },
       img: {
-        type: Buffer, //in the form of require("img")
+        type: String,
         required: true,
       },
       isInteractable: {
@@ -65,7 +65,8 @@ const userSchema = new mongoose.Schema({
         required: true,
       },  
       puzzleType: String, //for puzzles only
-      prompt: String, //for objects only
+      puzzleAnswer: String, //for puzzles only
+      prompt: String, //for objects and puzzles only
       dialogue: [ //for characters only
         {
           text: {
@@ -79,9 +80,9 @@ const userSchema = new mongoose.Schema({
           isAntagonist: Boolean,
         }
       ],
-      batteryLife: Number, //only for flashlight
+      // batteryLife: Number, //only for flashlight
       //isPotion ?
     } 
-    */
+  ],
 });
 module.exports = mongoose.model("User", userSchema);
