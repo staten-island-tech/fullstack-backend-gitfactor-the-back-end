@@ -6,10 +6,10 @@ const routes = require("./Routes/index"); //imports routes file (index.js)
 //takes the raw request and turns them into usable properties on req.body
 app.use(express.json());
 app.use(express.urlencoded());
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+
+const cors = require("cors");
+app.use(cors());
+
 app.use("/", routes); //when in home page, run this route
 app.listen(port, () => {
     console.log(`Server is up on port ${port}`)
