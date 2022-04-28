@@ -15,7 +15,7 @@ app.listen(port, () => {
     console.log(`Server is up on port ${port}`)
 });
 
-const jwt = require("express-jwt"); // NEW
+/*const jwt = require("express-jwt"); // NEW
 const jwksRsa = require("jwks-rsa"); // NEW
 
  const checkJwt = jwt({
@@ -24,20 +24,11 @@ const jwksRsa = require("jwks-rsa"); // NEW
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: "https://dev-0o06df15.us.auth0.com/.well-known/jwks.json"
+      jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`
     }),
   
     // Validate the audience (Identifier) and the issuer (Domain).
-    audience: "http://localhost:3000/api",
-    issuer: "https://dev-0o06df15.us.auth0.com/",
+    audience: authConfig.audience,
+    issuer: `https://${authConfig.domain}/`,
     algorithms: ["RS256"]
-  });
-
-  app.get("/authorized", checkJwt, async function (req, res){
-    try {
-      console.log(req.user);
-      res.json(req.user);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  }); */
