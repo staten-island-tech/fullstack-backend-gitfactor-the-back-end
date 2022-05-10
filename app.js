@@ -36,13 +36,13 @@ const checkJwt = jwt({
 
   app.get("/authorized", checkJwt, async function (req, res){
     try {
-      console.log(req.user);
+      console.log(req.user)
       res.json(req.user);
     } catch (error) {
       console.log(error);
     }
   });
-
+  
   app.listen(port,() => {
     console.log(`Server is up on ${port}`);
   });

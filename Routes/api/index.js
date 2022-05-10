@@ -20,9 +20,8 @@ const checkJwt = jwt({
     algorithms: ["RS256"]
   });
 
-router.get("/user/:id", checkJwt, userController.getUserData); //on login
-router.post("/add", userController.createUserData); //on register
-router.patch("/user/:id", userController.updateUserData); //on logout
-router.delete("/user/:id", userController.deleteUserData); //on delete account/restart 
+router.post("/", checkJwt, userController.getUserData); //on login
+router.patch("/update/:id", userController.updateUserData); //on logout
+router.delete("/delete/:id", userController.deleteUserData); //on delete account/restart 
 
 module.exports = router;
