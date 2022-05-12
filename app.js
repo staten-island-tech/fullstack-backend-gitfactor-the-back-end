@@ -1,49 +1,26 @@
-const express = require("express"); //this file requires express
-const port = process.env.PORT || 3000; //use external server port or localhost 3000
+const express = require("express"); // this file requires express server
+const port = process.env.PORT || 3000; // use external server port OR local 3001
 
-const app = express(); //instatiate express 
-
-const routes = require("./Routes/api/index"); //imports routes file (index.js)
-app.use("/api/index", routes);
-//takes the raw request and turns them into usable properties on req.body
-app.use(express.json());
-app.use(express.urlencoded());
+const app = express();
 
 const cors = require("cors");
+require("./DB/mongoose"); //ensures mongoos connects and runs
+
+//takes the raw requests and turns them into usable properties on req.body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+const routes = require("./Routes/api/index");
+app.use("/api/index", routes);
 
-
-const jwt = require("express-jwt"); // NEW
-const jwksRsa = require("jwks-rsa"); // NEW
-require("./DB/mongoose"); //ensures mongoose connects and runs
-
-
-const checkJwt = jwt({
-  // Provide a signing key based on the key identifier in the header and the signing keys provided by your Auth0 JWKS endpoint.
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: "https://dev-0o06df15.us.auth0.com/.well-known/jwks.json",
-  }),
-
-  // Validate the audience (Identifier) and the issuer (Domain).
-  audience: "http://localhost:3000/api",
-  issuer: "https://dev-0o06df15.us.auth0.com/",
-  algorithms: ["RS256"]
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
 });
-
-  app.get("/authorized", checkJwt, async function (req, res){
-    try {
-      console.log(req.user)
-      res.json(req.user);
-    } catch (error) {
-      console.log(error);
-    }
-  });
-  
-  app.listen(port,() => {
-    console.log(`Server is up on ${port}`);
-  });
-  
+app.listen(port, () => {
+  console.log(`Server is up on ${port}`);
+});

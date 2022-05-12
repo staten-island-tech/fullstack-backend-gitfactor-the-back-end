@@ -1,10 +1,13 @@
 const User = require("../Models/users");
 
 exports.getUserData = async (req, res) => {
+  console.log(req.body)
   try {
-    res.json("fart");
+    const user = await User.findOne();
+    Object.assign(user, req);
+    res.json(user);
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 };
 
