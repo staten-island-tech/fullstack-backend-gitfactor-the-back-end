@@ -1,9 +1,8 @@
 const User = require("../Models/users");
 
 exports.getUserData = async (req, res) => {
-  console.log(req.body)
   try {
-    const user = await User.findOne();
+    const user = await User.find({ client_id: req.params.id });
     Object.assign(user, req);
     res.json(user);
   } catch (error) {

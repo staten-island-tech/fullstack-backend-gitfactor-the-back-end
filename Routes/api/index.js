@@ -15,12 +15,12 @@ const checkJwt = jwt({
     }),
   
     // Validate the audience (Identifier) and the issuer (Domain).
-    audience: "http://localhost:3000/api",
+    audience: "https://dev-0o06df15.us.auth0.com/userinfo",
     issuer: "https://dev-0o06df15.us.auth0.com/",
     algorithms: ["RS256"]
   });
 
-router.post("/:id", userController.getUserData); //on login
+router.post("/:id", checkJwt, userController.getUserData); //on login
 router.patch("/update/:id", userController.updateUserData); //on logout
 router.delete("/delete/:id", userController.deleteUserData); //on delete account/restart 
 
