@@ -2,8 +2,8 @@ const User = require("../Models/users");
 
 exports.getUserData = async (req, res) => {
   try {
-    const user = await User.find({ client_id: req.params.id });
-    Object.assign(user, req);
+    const user = await User.findById(req.params.id);
+    Object.assign(user, req.body);
     res.json(user);
   } catch (error) {
     console.log(error);
@@ -12,7 +12,7 @@ exports.getUserData = async (req, res) => {
 
 exports.updateUserData = async (req, res) => {
     try {
-        const user = await User.find({ client_id: req.params.id });
+      const user = await User.findById(req.params.id);
         const updates = Object.keys(req.body);
         updates.forEach(update => {
             user[update] = req.body[update]; //user's information = updated information
