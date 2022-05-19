@@ -2,26 +2,17 @@ const User = require("../Models/users");
 
 exports.getUserData = async (req, res) => {
   try {
-      const Users = await User.find();
-      res.json(Users);
+    const user = await User.findById(req.params.id);
+    Object.assign(user, req.body);
+    res.json(user);
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
-};
-
-exports.createUserData = async (req, res) => {
-    try {
-        const user = new User(req.body);
-        await user.save();
-        res.json(`You have saved the user ${user.name}.`);
-    } catch (error) {
-        res.status(500).json(error);
-    }
 };
 
 exports.updateUserData = async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+      const user = await User.findById(req.params.id);
         const updates = Object.keys(req.body);
         updates.forEach(update => {
             user[update] = req.body[update]; //user's information = updated information

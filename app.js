@@ -1,34 +1,26 @@
-const express = require("express"); //this file requires express
-const port = process.env.PORT || 3000; //use external server port or localhost 3000
-const app = express(); //instatiate express 
-require("./DB/mongoose"); //ensures mongoose connects and runs
-const routes = require("./Routes/index"); //imports routes file (index.js)
-//takes the raw request and turns them into usable properties on req.body
-app.use(express.json());
-app.use(express.urlencoded());
+const express = require("express"); // this file requires express server
+const port = process.env.PORT || 3000; // use external server port OR local 3001
+
+const app = express();
 
 const cors = require("cors");
+require("./DB/mongoose"); //ensures mongoos connects and runs
+
+//takes the raw requests and turns them into usable properties on req.body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use("/", routes); //when in home page, run this route
-app.listen(port, () => {
-    console.log(`Server is up on port ${port}`)
+const routes = require("./Routes/api/index");
+app.use("/api/index", routes);
+
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
 });
-
-/*const jwt = require("express-jwt"); // NEW
-const jwksRsa = require("jwks-rsa"); // NEW
-
- const checkJwt = jwt({
-    // Provide a signing key based on the key identifier in the header and the signing keys provided by your Auth0 JWKS endpoint.
-    secret: jwksRsa.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`
-    }),
-  
-    // Validate the audience (Identifier) and the issuer (Domain).
-    audience: authConfig.audience,
-    issuer: `https://${authConfig.domain}/`,
-    algorithms: ["RS256"]
-  }); */
+app.listen(port, () => {
+  console.log(`Server is up on ${port}`);
+});
