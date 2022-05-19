@@ -2,20 +2,11 @@ const User = require("../Models/users");
 
 exports.getUserData = async (req, res) => {
   try {
-    const Users = await User.find();
-    res.json(Users);
+    const user = await User.findById(req.params.id);
+    Object.assign(user, req.body);
+    res.json(user);
   } catch (error) {
     console.log(error);
-  }
-};
-
-exports.createUserData = async (req, res) => {
-  try {
-    const user = new User(req.body);
-    await user.save();
-    res.json(`You have saved the user ${user.name}.`);
-  } catch (error) {
-    res.status(500).json(error);
   }
 };
 
