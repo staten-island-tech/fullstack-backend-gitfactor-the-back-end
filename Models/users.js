@@ -1,14 +1,6 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   // these two will be added later once login functionality is integrated
-  name: {
-    type: String,
-    required: true,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
   level: {
     type: Number,
     required: true,
@@ -28,6 +20,14 @@ const userSchema = new mongoose.Schema({
   inventory: {
     type: Array,
     required: true,
-  }
+  },
+  battery: {
+    type: Number,
+    required: true,
+  },
+  isIntro: {
+    type: Boolean,
+    required: true,
+  },
 });
 module.exports = mongoose.model("User", userSchema, "authData");
