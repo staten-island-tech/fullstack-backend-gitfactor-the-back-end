@@ -29,5 +29,9 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  solvedPuzzles: {
+    type: Array,
+    required: true,
+  },
 });
 module.exports = mongoose.model("User", userSchema, "authData");
