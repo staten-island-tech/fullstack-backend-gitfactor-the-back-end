@@ -3,7 +3,6 @@ const User = require("../Models/users");
 exports.getUserData = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    Object.assign(user, req.body);
     res.json(user);
   } catch (error) {
     console.log(error);
