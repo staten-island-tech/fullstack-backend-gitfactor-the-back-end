@@ -33,5 +33,9 @@ const userSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  failedLevel: {
+    type: Boolean,
+    required: true,
+  },
 });
 module.exports = mongoose.model("User", userSchema, "authData");
