@@ -22,15 +22,3 @@ exports.updateUserData = async (req, res) => {
     console.log(error);
   }
 };
-
-exports.deleteUserData = async (req, res) => {
-  try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) {
-      res.status(404).send();
-    }
-    res.send(`${user.name} was deleted from the database.`);
-  } catch (error) {
-    console.log(error);
-  }
-};

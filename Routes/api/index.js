@@ -21,7 +21,6 @@ const checkJwt = jwt({
   });
 
 router.get("/:id", checkJwt, userController.getUserData); //on login
-router.patch("/update/:id", userController.updateUserData); //on logout
-router.delete("/delete/:id", userController.deleteUserData); //on delete account/restart 
+router.patch("/update/:id", checkJwt, userController.updateUserData); //on logout
 
 module.exports = router;
