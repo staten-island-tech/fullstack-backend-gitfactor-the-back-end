@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
-  // these two will be added later once login functionality is integrated
   level: {
     type: Number,
     required: true,
