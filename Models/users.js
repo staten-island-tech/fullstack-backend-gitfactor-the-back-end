@@ -39,6 +39,10 @@ const userSchema = new mongoose.Schema({
   roofTime: {
     type: Number,
     required: true,
-  }
+  },
+  gameFinished: {
+    type: Boolean,
+    required: true,
+  },
 });
 module.exports = mongoose.model("User", userSchema, "authData");
